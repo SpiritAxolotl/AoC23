@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.io.File;
 
-public class App {
+public class Day1 {
     public static boolean debug = false;
     public static String[] numbers = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
     public static String lowestNum(String in) {
