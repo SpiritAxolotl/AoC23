@@ -36,13 +36,10 @@ public class App {
         }
         return -1;
     }
-    public static void main(String[] args) throws Exception {
-        Scanner scan = new Scanner(new File("resources/input.txt"));
+    public static int[] numberParse(Scanner scan) {
         int total1 = 0;
         int total2 = 0;
-        int c = 0;
-        while (scan.hasNextLine()) {
-            c++;
+        for (int c=1; scan.hasNextLine(); c++) {
             String input = scan.nextLine();
             if (input.isBlank()) continue;
             int[] ints1 = new int[2];
@@ -83,7 +80,20 @@ public class App {
             }
         }
         scan.close();
-        System.out.println("Part 1: " + total1);
-        System.out.println("Part 2: " + total2);
+        return new int[] {total1, total2};
+    }
+    public static void main(String[] args) throws Exception {
+        Scanner testscan = new Scanner(new File("resources/testinput.txt"));
+        Scanner testscan2 = new Scanner(new File("resources/testinput2.txt"));
+        Scanner scan = new Scanner(new File("resources/input.txt"));
+        int[] inputanswers = {numberParse(testscan)[0], numberParse(testscan2)[1]};
+        if (inputanswers[0] == 142 && inputanswers[1] == 281) {
+            System.out.println("Test input answer is correct! Attempting the real input...");
+            inputanswers = numberParse(scan);
+            System.out.println("Part 1: " + inputanswers[0]);
+            System.out.println("Part 2: " + inputanswers[1]);
+        } else {
+            System.out.println("Oh no! Test input answer isn't correct! Fix it before trying it on the real input.");
+        }
     }
 }
