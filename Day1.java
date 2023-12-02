@@ -34,49 +34,49 @@ public class Day1 {
         return -1;
     }
     public static int[] numberParse(Scanner scan) {
-        int total1 = 0;
-        int total2 = 0;
+        int totalpart1 = 0;
+        int totalpart2 = 0;
         for (int c=1; scan.hasNextLine(); c++) {
             String input = scan.nextLine();
             if (input.isBlank()) continue;
-            int[] ints1 = new int[2];
-            int[] ints2 = new int[2];
+            int[] intspart1 = new int[2];
+            int[] intspart2 = new int[2];
             for (int i=0; i<input.length(); i++) {
                 try {
-                    ints1[0] = Integer.parseInt(input.substring(i,i+1));
+                    intspart1[0] = Integer.parseInt(input.substring(i,i+1));
                 } catch (NumberFormatException e) {continue;}
                 String lowestNum = lowestNum(input);
-                if (!lowestNum.isEmpty() && input.indexOf(lowestNum) < input.indexOf(ints1[0]+""))
-                    ints2[0] = indexOfArray(lowestNum, numbers) + 1;
-                else ints2[0] = ints1[0];
+                if (!lowestNum.isEmpty() && input.indexOf(lowestNum) < input.indexOf(intspart1[0]+""))
+                    intspart2[0] = indexOfArray(lowestNum, numbers) + 1;
+                else intspart2[0] = intspart1[0];
                 break;
             }
             for (int i=input.length()-1; i>=0; i--) {
                 try {
-                    ints1[1] = Integer.parseInt(input.substring(i,i+1));
+                    intspart1[1] = Integer.parseInt(input.substring(i,i+1));
                 } catch (NumberFormatException e) {continue;}
                 String highestNum = highestNum(input);
-                if (!highestNum.isEmpty() && input.lastIndexOf(highestNum) > input.lastIndexOf(ints1[1]+""))
-                    ints2[1] = indexOfArray(highestNum, numbers) + 1;
-                else ints2[1] = ints1[1];
+                if (!highestNum.isEmpty() && input.lastIndexOf(highestNum) > input.lastIndexOf(intspart1[1]+""))
+                    intspart2[1] = indexOfArray(highestNum, numbers) + 1;
+                else intspart2[1] = intspart1[1];
                 break;
             }
             try {
-                total1 += Integer.parseInt(ints1[0] + "" + ints1[1]);
-                total2 += Integer.parseInt(ints2[0] + "" + ints2[1]);
+                totalpart1 += Integer.parseInt(intspart1[0] + "" + intspart1[1]);
+                totalpart2 += Integer.parseInt(intspart2[0] + "" + intspart2[1]);
                 if (debug) {
-                    if (ints1[0] * ints1[1] == 0) System.out.print("ERROR ON ");
-                    System.out.println("line " + c + ": " + ints2[0] + " " + ints2[1] + " becomes " + Integer.parseInt(ints2[0] + "" + ints2[1]));
+                    if (intspart1[0] * intspart1[1] == 0) System.out.print("ERROR ON ");
+                    System.out.println("line " + c + ": " + intspart2[0] + " " + intspart2[1] + " becomes " + Integer.parseInt(intspart2[0] + "" + intspart2[1]));
                 }
             } catch (Exception e) {e.printStackTrace();}
         }
         scan.close();
-        return new int[] {total1, total2};
+        return new int[] {totalpart1, totalpart2};
     }
     public static void main(String[] args) throws Exception {
-        Scanner testscan = new Scanner(new File("resources/testinput.txt"));
-        Scanner testscan2 = new Scanner(new File("resources/testinput2.txt"));
-        Scanner scan = new Scanner(new File("resources/input.txt"));
+        Scanner testscan = new Scanner(new File("resources/day1/testinput.txt"));
+        Scanner testscan2 = new Scanner(new File("resources/day1/testinput2.txt"));
+        Scanner scan = new Scanner(new File("resources/day1/input.txt"));
         int[] inputanswers = {numberParse(testscan)[0], numberParse(testscan2)[1]};
         if (inputanswers[0] == 142 && inputanswers[1] == 281) {
             System.out.println("Test input answer is correct! Attempting the real input...");
