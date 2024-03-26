@@ -3,7 +3,7 @@ const fs = require('fs');
 const testinput = fs.readFileSync(`${process.env.HOME}/Repositories/AoC23/3/testinput.txt`, 'utf8');
 const input = fs.readFileSync(`${process.env.HOME}/Repositories/AoC23/3/input.txt`, 'utf8');
 
-const part1done = false;
+const part1done = true;
 
 const correcttestanswers = [4361, 467835];
 
@@ -13,7 +13,7 @@ function day3(str) {
     for (let r=0; r<lines.length; r++) {
         for (let c=0; c<lines[r].length; c++) {
             const char = lines[r][c];
-            if (char === "*") {
+            if (char.match(/[^\d\.]/g)) {
                 const nums = checkAllAround(lines, r, c);
                 answer[0] += nums[0];
                 answer[1] += nums[1];
@@ -26,7 +26,7 @@ function day3(str) {
 function checkAllAround(lines, r, c) {
     const order = [];
     for (let i=-1; i<=1; i++) {
-        if (!i && isNum(lines[r+i][c])) {
+        if (i && isNum(lines[r+i][c])) {
             order.push([r+i,c]);
             continue;
         }
@@ -41,7 +41,10 @@ function checkAllAround(lines, r, c) {
             partnumbers.push(num);
         }
     }
-    return [partnumbers.reduce((sum,n) => sum += n), partnumbers.length === 2 ? partnumbers[0] * partnumbers[1] : 0];
+    return [
+        partnumbers.reduce((sum,n) => sum += n),
+        lines[r][c] === "*" && partnumbers.length === 2 ? partnumbers[0] * partnumbers[1] : 0
+    ];
 }
 
 function isNum(x) {
@@ -64,7 +67,7 @@ if (testanswers[0] === correcttestanswers[0] && (!part1done || testanswers[1] ==
     const s = part1done ? "s" : "";
     console.log(`Test answer${s} passed! Attempting real answer${s}...`);
     const answer = day3(input);
-    console.log(`Part 1: ${answer[0]}${part1done ? `\nPart2: ${answer[1]}` : ""}`);
+    console.log(`Part 1: ${answer[0]}${part1done ? `\nPart 2: ${answer[1]}` : ""}`);
 } else {
     if (testanswers[0] !== correcttestanswers[0] && (!part1done || testanswers[1] === correcttestanswers[1]))
         console.log(
