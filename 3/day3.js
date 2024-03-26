@@ -1,11 +1,4 @@
-const fs = require('fs');
-
-const testinput = fs.readFileSync(`${process.env.HOME}/Repositories/AoC23/3/testinput.txt`, 'utf8');
-const input = fs.readFileSync(`${process.env.HOME}/Repositories/AoC23/3/input.txt`, 'utf8');
-
-const part1done = true;
-
-const correcttestanswers = [4361, 467835];
+const t = require("../global/test.js");
 
 function day3(str) {
     const answer = [0, 0];
@@ -61,32 +54,4 @@ function fullNumber(line, i) {
     return +line.substring(left, right);
 }
 
-const testanswers = day3(testinput);
-
-if (testanswers[0] === correcttestanswers[0] && (!part1done || testanswers[1] === correcttestanswers[1])) {
-    const s = part1done ? "s" : "";
-    console.log(`Test answer${s} passed! Attempting real answer${s}...`);
-    const answer = day3(input);
-    console.log(`Part 1: ${answer[0]}${part1done ? `\nPart 2: ${answer[1]}` : ""}`);
-} else {
-    if (testanswers[0] !== correcttestanswers[0] && (!part1done || testanswers[1] === correcttestanswers[1]))
-        console.log(
-            `Part 1 test answer failed.\n` +
-            `Output: ${testanswers[0]}\n` +
-            `Expected: ${correcttestanswers[0]}`
-        );
-    else if (testanswers[0] === correcttestanswers[0] && testanswers[1] !== correcttestanswers[1])
-        console.log(
-            `Part 2 test answer failed.\n` +
-            `Output: ${testanswers[1]}\n` +
-            `Expected: ${correcttestanswers[1]}`
-        );
-    else
-        console.log(
-            `The test answers for both parts failed.\n` +
-            `Part 1 Output: ${testanswers[0]}\n` +
-            `Expected: ${correcttestanswers[0]}\n` +
-            `Part 2 Output: ${testanswers[1]}\n` +
-            `Expected: ${correcttestanswers[1]}`
-        );
-}
+t.test(3, day3, [4361, 467835]);
