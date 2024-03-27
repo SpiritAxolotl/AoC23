@@ -1,7 +1,7 @@
-const t = require("../global/test.js");
-const d = require("../global/day.js");
+require("../global/test.js");
+require("../global/day.js");
 
-class Day4 extends d.Day {
+class Day4 extends Day {
     constructor(str) {
         super(str);
         this.cards = [];
@@ -38,4 +38,4 @@ class Day4 extends d.Day {
     }
 }
 
-t.test(4, Day4, [13, 30]);
+test(4, Day4, [13, 30]);

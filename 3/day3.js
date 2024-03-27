@@ -1,7 +1,7 @@
-const t = require("../global/test.js");
-const d = require("../global/day.js");
+require("../global/test.js");
+require("../global/day.js");
 
-class Day3 extends d.Day {
+class Day3 extends Day {
     constructor(str) {
         super(str);
         for (let r=0; r<this.lines.length; r++) {
@@ -55,4 +55,4 @@ function isNum(x) {
     return !isNaN(+x);
 }
 
-t.test(3, Day3, [4361, 467835]);
+test(3, Day3, [4361, 467835]);

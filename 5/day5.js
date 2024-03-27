@@ -1,7 +1,7 @@
-const t = require("../global/test.js");
-const d = require("../global/day.js");
+require("../global/test.js");
+require("../global/day.js");
 
-class Day5 extends d.Day {
+class Day5 extends Day {
     constructor(str) {
         super(str);
         this.seeds = lines[0].substring(lines[0].indexOf(":")+2).split(/\s+/g).map(i=>+i);
@@ -18,4 +18,4 @@ class Day5 extends d.Day {
     }
 }
 
-t.test(5, Day5, [35, 35], false);
+test(5, Day5, [35, 35], false);
