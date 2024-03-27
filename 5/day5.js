@@ -1,12 +1,21 @@
 const t = require("../global/test.js");
+const d = require("../global/day.js");
 
-function day5(str) {
-    const answer = [0, 0];
-    const lines = str.split("\n");
-    for (const line of lines) {
-        
+class Day5 extends d.Day {
+    constructor(str) {
+        super(str);
+        this.seeds = lines[0].substring(lines[0].indexOf(":")+2).split(/\s+/g).map(i=>+i);
+        this.lines.splice(0,2);
+        this.map = [];
+        {
+            let index = -1;
+            for (const line of lines)
+                if (line.includes("map:"))
+                    map[++index] ??= [];
+                else if (line !== "")
+                    map[index].push(line.split(/\s+/g));
+        }
     }
-    return answer;
 }
 
-t.test(5, day5, [35, 35]);
+t.test(5, Day5, [35, 35], false);

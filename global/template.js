@@ -1,12 +1,13 @@
 const t = require("../global/test.js");
+const d = require("../global/day.js");
 
-function dayX(str) {
-    const answer = [0, 0];
-    const lines = str.split("\n");
-    for (const line of lines) {
-        
+class DayX extends d.Day {
+    constructor(str) {
+        super(str);
+        for (const line of this.lines) {
+            
+        }
     }
-    return answer;
 }
 
-t.test(x, dayX, [10, 10]);
+t.test(x, DayX, [10, 10], false);

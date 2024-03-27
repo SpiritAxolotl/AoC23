@@ -1,15 +1,15 @@
 const r = require("./read.js");
 
 module.exports = {
-    test: function(day, dayfunc, correcttestanswers, part1done) {
+    test: function(day, dayclass, correcttestanswers, part1done) {
         const [testinput, input] = r.read(day);
-        const testanswers = dayfunc(testinput);
+        const testanswers = new dayclass(testinput).getAnswers();
         if (typeof part1done !== "boolean")
             part1done = true;
         if (testanswers[0] === correcttestanswers[0] && (!part1done || testanswers[1] === correcttestanswers[1])) {
             const s = part1done ? "s" : "";
             console.log(`Test answer${s} passed! Attempting real answer${s}...`);
-            const answers = dayfunc(input);
+            const answers = new dayclass(input).getAnswers();
             console.log(`Part 1: ${answers[0]}${part1done ? `\nPart 2: ${answers[1]}` : ""}`);
         } else {
             if (testanswers[0] !== correcttestanswers[0] && (!part1done || testanswers[1] === correcttestanswers[1]))

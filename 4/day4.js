@@ -1,40 +1,41 @@
 const t = require("../global/test.js");
+const d = require("../global/day.js");
 
-function day4(str) {
-    const answer = [0, 0];
-    const lines = str.split("\n");
-    const cards = [];
-    for (const line of lines) {
-        const winning = line.substring(line.indexOf(":")+2, line.indexOf("|")-1).trim().split(/\s+/g).map(n=>+n);
-        const nums = line.substring(line.indexOf("|")+2).trim().split(/\s+/g).map(n=>+n);
-        cards.push([winning, nums]);
+class Day4 extends d.Day {
+    constructor(str) {
+        super(str);
+        this.cards = [];
+        for (const line of this.lines) {
+            const winning = line.substring(line.indexOf(":")+2, line.indexOf("|")-1).trim().split(/\s+/g).map(n=>+n);
+            const nums = line.substring(line.indexOf("|")+2).trim().split(/\s+/g).map(n=>+n);
+            this.cards.push([winning, nums]);
+        }
+        let totalWinningNums = 0;
+        const totalCards = [];
+        for (let c=0; c<this.cards.length; c++) {
+            totalWinningNums += this.evaluateCard(c)[0];
+            this.recursiveBS(c, totalCards);
+        }
+        this.answer[0] = totalWinningNums;
+        this.answer[1] = totalCards.reduce((sum,n) => sum += n);
     }
-    let totalWinningNums = 0;
-    const totalCards = [];
-    for (let c=0; c<cards.length; c++) {
-        totalWinningNums += evaluateCard(c, cards)[0];
-        recursiveBS(c, cards, totalCards);
+    
+    evaluateCard(n) {
+        let multi = -1;
+        const card = this.cards[n];
+        for (const num of card[1])
+            if (card[0].includes(num))
+                multi++;
+        return [multi>=0?2**multi:0, multi+1];
     }
-    answer[0] = totalWinningNums;
-    answer[1] = totalCards.reduce((sum,n) => sum += n);
-    return answer;
+    
+    recursiveBS(c, totalCards) {
+        totalCards[c] ??= 0;
+        totalCards[c]++;
+        const multi = this.evaluateCard(c)[1];
+        for (let i=1; i<=multi; i++)
+            this.recursiveBS(c+i, totalCards);
+    }
 }
 
-function evaluateCard(n, cards) {
-    let multi = -1;
-    const card = cards[n];
-    for (const num of card[1])
-        if (card[0].includes(num))
-            multi++;
-    return [multi>=0?2**multi:0, multi+1];
-}
-
-function recursiveBS(c, cards, totalCards) {
-    totalCards[c] ??= 0;
-    totalCards[c]++;
-    const multi = evaluateCard(c, cards)[1];
-    for (let i=1; i<=multi; i++)
-        recursiveBS(c+i, cards, totalCards);
-}
-
-t.test(4, day4, [13, 30]);
+t.test(4, Day4, [13, 30]);
