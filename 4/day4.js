@@ -11,13 +11,13 @@ class Day4 extends Day {
             this.cards.push([winning, nums]);
         }
         let totalWinningNums = 0;
-        const totalCards = [];
+        this.totalCards = [];
         for (let c=0; c<this.cards.length; c++) {
             totalWinningNums += this.evaluateCard(c)[0];
-            this.recursiveBS(c, totalCards);
+            this.recursiveBS(c);
         }
         this.answer[0] = totalWinningNums;
-        this.answer[1] = totalCards.reduce((sum,n) => sum += n);
+        this.answer[1] = this.totalCards.reduce((sum,n) => sum += n);
     }
     
     evaluateCard(n) {
@@ -29,12 +29,12 @@ class Day4 extends Day {
         return [multi>=0?2**multi:0, multi+1];
     }
     
-    recursiveBS(c, totalCards) {
-        totalCards[c] ??= 0;
-        totalCards[c]++;
+    recursiveBS(c) {
+        this.totalCards[c] ??= 0;
+        this.totalCards[c]++;
         const multi = this.evaluateCard(c)[1];
         for (let i=1; i<=multi; i++)
-            this.recursiveBS(c+i, totalCards);
+            this.recursiveBS(c+i);
     }
 }
 

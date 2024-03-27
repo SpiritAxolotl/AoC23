@@ -40,14 +40,14 @@ class Day3 extends Day {
         ];
     }
     
-    fullNumber(line, i) {
+    fullNumber(str, i) {
         let left = i;
         let right = i+1;
-        while (left>=0 && isNum(line[left-1]))
+        while (left>=0 && isNum(str[left-1]))
             left--;
-        while (right<line.length && isNum(line[right]))
+        while (right<str.length && isNum(str[right]))
             right++;
-        return +line.substring(left, right);
+        return +str.substring(left, right);
     }
 }
 
