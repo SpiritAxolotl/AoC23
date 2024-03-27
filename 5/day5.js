@@ -4,16 +4,16 @@ require("../global/day.js");
 class Day5 extends Day {
     constructor(str) {
         super(str);
-        this.seeds = lines[0].substring(lines[0].indexOf(":")+2).split(/\s+/g).map(i=>+i);
-        this.lines.splice(0,2);
+        this.seeds = this.lines[0].substring(this.lines[0].indexOf(":")+2).split(/\s+/g).map(i=>+i);
+        const lines = this.lines.slice(2);
         this.map = [];
         {
             let index = -1;
             for (const line of lines)
                 if (line.includes("map:"))
-                    map[++index] ??= [];
+                    this.map[++index] ??= [];
                 else if (line !== "")
-                    map[index].push(line.split(/\s+/g));
+                    this.map[index].push(line.split(/\s+/g));
         }
     }
 }
