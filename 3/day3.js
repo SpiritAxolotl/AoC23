@@ -8,7 +8,7 @@ class Day3 extends d.Day {
             for (let c=0; c<this.lines[r].length; c++) {
                 const char = this.lines[r][c];
                 if (char.match(/[^\d\.]/g)) {
-                    const nums = this.checkAllAround(this.lines, r, c);
+                    const nums = this.checkAllAround(r, c);
                     this.answer[0] += nums[0];
                     this.answer[1] += nums[1];
                 }
@@ -16,10 +16,10 @@ class Day3 extends d.Day {
         }
     }
     
-    checkAllAround(lines, r, c) {
+    checkAllAround(r, c) {
         const order = [];
         for (let i=-1; i<=1; i++) {
-            if (i && isNum(lines[r+i][c])) {
+            if (i && isNum(this.lines[r+i][c])) {
                 order.push([r+i,c]);
                 continue;
             }
@@ -29,14 +29,14 @@ class Day3 extends d.Day {
         }
         const partnumbers = [];
         for (const [y,x] of order) {
-            if (isNum(lines[y][x])) {
-                const num = this.fullNumber(lines[y], x);
+            if (isNum(this.lines[y][x])) {
+                const num = this.fullNumber(this.lines[y], x);
                 partnumbers.push(num);
             }
         }
         return [
             partnumbers.reduce((sum,n) => sum += n),
-            lines[r][c] === "*" && partnumbers.length === 2 ? partnumbers[0] * partnumbers[1] : 0
+            this.lines[r][c] === "*" && partnumbers.length === 2 ? partnumbers[0] * partnumbers[1] : 0
         ];
     }
     
