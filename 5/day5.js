@@ -23,11 +23,16 @@ class Day5 extends Day {
                 const order = [...this.seedsToLocation[index++]];
                 const neworder = [...order];
                 for (const [destStart, sourceStart, length] of row) {
+                    for (let i=0; i<order.length; i++)
+                        if (sourceStart <= order[i] && order[i] < sourceStart+length)
+                            neworder[i] = destStart+(order[i]-sourceStart);
+                    /*don't use this. i think it works but it's hella inefficient
                     for (let i=0; i<length; i++) {
                         const d = order.indexOf(sourceStart+i);
                         if (d !== -1)
                             neworder[d] = destStart+i;
                     }
+                    */
                 }
                 this.seedsToLocation[index] = neworder;
             }
