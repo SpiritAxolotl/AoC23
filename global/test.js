@@ -5,8 +5,9 @@ global.test = function(day, dayclass, correcttestanswers, part1done) {
     const testanswers = new dayclass(testinput).getAnswers();
     if (typeof part1done !== "boolean")
         part1done = true;
+    const s = part1done ? "s" : "";
+    console.log(`Attempting test answer${s}...`);
     if (testanswers[0] === correcttestanswers[0] && (!part1done || testanswers[1] === correcttestanswers[1])) {
-        const s = part1done ? "s" : "";
         console.log(`Test answer${s} passed! Attempting real answer${s}...`);
         const answers = new dayclass(input).getAnswers();
         console.log(`Part 1: ${answers[0]}${part1done ? `\nPart 2: ${answers[1]}` : ""}`);
