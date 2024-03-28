@@ -2,11 +2,11 @@ require("./read.js");
 
 global.test = function(day, dayclass, correcttestanswers, part1done) {
     const [testinput, input] = read(day);
-    const testanswers = new dayclass(testinput).getAnswers();
     if (typeof part1done !== "boolean")
         part1done = true;
     const s = part1done ? "s" : "";
     console.log(`Attempting test answer${s}...`);
+    const testanswers = new dayclass(testinput).getAnswers();
     if (testanswers[0] === correcttestanswers[0] && (!part1done || testanswers[1] === correcttestanswers[1])) {
         console.log(`Test answer${s} passed! Attempting real answer${s}...`);
         const answers = new dayclass(input).getAnswers();

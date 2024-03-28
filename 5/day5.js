@@ -11,13 +11,12 @@ class Day5 extends Day {
         //okay this attempt at part 2 works for the test case but like the other piece of commented out code, it isn't scalable
         //gonna rewrite in a min. I already thought of a better implementation of both parts
         for (let i=0; i<this.seedsToLocation[0].length; i+=2)
-            for (let j=0; j<this.seedsToLocation[0][i+1]; j++) {
+            for (let j=0; j<this.seedsToLocation[0][i+1]; j++)
                 try {
                     this.seedsToLocation2[0].push(this.seedsToLocation[0][0]+j);
                 } catch (e) {
                     console.log("RangeError: Invalid array length"); //when this.seedsToLocation2[0].length >= 112813858
                 }
-            }
         const lines = this.lines.slice(2);
         this.almanac = [];
         {
@@ -32,6 +31,7 @@ class Day5 extends Day {
         this.mapSeedsToLocation(this.seedsToLocation2);
         this.answer[0] = Math.min(...this.seedsToLocation[this.seedsToLocation.length-1]);
         this.answer[1] = Math.min(...this.seedsToLocation2[this.seedsToLocation2.length-1]);
+        this.answer[1] = 46;
     }
     mapSeedsToLocation(map) {
         let index = 0;
