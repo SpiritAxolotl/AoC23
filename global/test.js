@@ -1,6 +1,7 @@
 const { read } = require("./read.js");
 
-const test = (day, dayClass, correctTestAnswers, partOneDone=false) => {
+const test = (day, dayClass, correctTestAnswers) => {
+  const partOneDone = correctTestAnswers[1] !== undefined;
   const [testInput, input] = read(day);
   const s = partOneDone ? "s" : "";
   console.log(`Attempting test answer${s}...`);

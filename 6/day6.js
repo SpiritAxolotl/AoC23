@@ -17,4 +17,4 @@ class Day6 extends Day {
   }
 }
 
-test(6, Day6, [288, 0], false);
+test(6, Day6, [288]);
