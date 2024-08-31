@@ -1,5 +1,5 @@
-require("../global/test.js");
-require("../global/day.js");
+const { Day } = require("../global/day.js");
+const { test } = require("../global/test.js");
 
 class Day5 extends Day {
   constructor(str) {
@@ -31,9 +31,9 @@ class Day5 extends Day {
     this.mapSeedsToLocation(this.seedsToLocation2);
     this.answer[0] = Math.min(...this.seedsToLocation[this.seedsToLocation.length-1]);
     this.answer[1] = Math.min(...this.seedsToLocation2[this.seedsToLocation2.length-1]);
-    this.answer[1] = 46;
+    //this.answer[1] = 46;
   }
-  mapSeedsToLocation(map) {
+  mapSeedsToLocation = (map) => {
     let index = 0;
     for (const row of this.almanac) {
       const order = [...map[index++]];

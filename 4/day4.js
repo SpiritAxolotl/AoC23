@@ -1,5 +1,5 @@
-require("../global/test.js");
-require("../global/day.js");
+const { Day } = require("../global/day.js");
+const { test } = require("../global/test.js");
 
 class Day4 extends Day {
   constructor(str) {
@@ -20,7 +20,7 @@ class Day4 extends Day {
     this.answer[1] = this.totalCards.reduce((sum,n) => sum += n);
   }
   
-  evaluateCard(n) {
+  evaluateCard = (n) => {
     let multi = -1;
     const card = this.cards[n];
     for (const num of card[1])
@@ -29,7 +29,7 @@ class Day4 extends Day {
     return [multi>=0?2**multi:0, multi+1];
   }
   
-  recursiveBS(c) {
+  recursiveBS = (c) => {
     this.totalCards[c] ??= 0;
     this.totalCards[c]++;
     const multi = this.evaluateCard(c)[1];

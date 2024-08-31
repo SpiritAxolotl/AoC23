@@ -1,5 +1,5 @@
-require("../global/test.js");
-require("../global/day.js");
+const { Day } = require("../global/day.js");
+const { test } = require("../global/test.js");
 
 class Day3 extends Day {
   constructor(str) {
@@ -16,7 +16,7 @@ class Day3 extends Day {
     }
   }
   
-  checkAllAround(r, c) {
+  checkAllAround = (r, c) => {
     const order = [];
     for (let i=-1; i<=1; i++) {
       if (i && isNum(this.lines[r+i][c])) {
@@ -27,20 +27,20 @@ class Day3 extends Day {
         if (i || j)
           order.push([r+i,c+j]);
     }
-    const partnumbers = [];
+    const partNumbers = [];
     for (const [y,x] of order) {
       if (isNum(this.lines[y][x])) {
         const num = this.fullNumber(this.lines[y], x);
-        partnumbers.push(num);
+        partNumbers.push(num);
       }
     }
     return [
-      partnumbers.reduce((sum,n) => sum += n),
-      this.lines[r][c] === "*" && partnumbers.length === 2 ? partnumbers[0] * partnumbers[1] : 0
+      partNumbers.reduce((sum,n) => sum += n, 0),
+      this.lines[r][c] === "*" && partNumbers.length === 2 ? partNumbers[0] * partNumbers[1] : 0
     ];
   }
   
-  fullNumber(str, i) {
+  fullNumber = (str, i) => {
     let left = i;
     let right = i+1;
     while (left>=0 && isNum(str[left-1]))
@@ -51,8 +51,8 @@ class Day3 extends Day {
   }
 }
 
-function isNum(x) {
+const isNum = (x) => {
   return !isNaN(+x);
-}
+};
 
 test(3, Day3, [4361, 467835]);

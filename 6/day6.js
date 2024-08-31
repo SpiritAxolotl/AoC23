@@ -1,5 +1,5 @@
-require("../global/test.js");
-require("../global/day.js");
+const { Day } = require("../global/day.js");
+const { test } = require("../global/test.js");
 
 class Day6 extends Day {
   constructor(str) {
