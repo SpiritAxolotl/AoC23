@@ -37,11 +37,11 @@ class Day5 extends Day {
     let index = 0;
     for (const row of this.almanac) {
       const order = [...map[index++]];
-      const neworder = [...order];
+      const newOrder = [...order];
       for (const [destStart, sourceStart, length] of row) {
         for (let i=0; i<order.length; i++)
           if (sourceStart <= order[i] && order[i] < sourceStart+length)
-            neworder[i] = destStart+order[i]-sourceStart;
+            newOrder[i] = destStart+order[i]-sourceStart;
         /*don't use this. i think it works but it's hella inefficient
         for (let i=0; i<length; i++) {
           const d = order.indexOf(sourceStart+i);
@@ -50,7 +50,7 @@ class Day5 extends Day {
         }
         */
       }
-      map[index] = neworder;
+      map[index] = newOrder;
     }
   }
 }
